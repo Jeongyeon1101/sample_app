@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   get 'lists/new'
+  post 'lists' => 'lists#create'
+  #createは保存機能を追加するアクション
   get 'lists/index'
   get 'lists/show'
   get 'lists/edit'
