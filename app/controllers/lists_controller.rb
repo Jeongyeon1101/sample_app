@@ -3,17 +3,18 @@ class ListsController < ApplicationController
     @list = List.new
   end
 
-  def create 
+  def create
     @list = List.new(list_params)
     if @list.save
       flash[:notice] = "投稿が成功しました"
       redirect_to list_path(@list.id)
     else
       render :new
-    end  
+    end
   end
-  
+
   def index
+    puts "作成したキー #{ENV['SECRET_KEY']}"
     @lists = List.all
   end
 
@@ -24,22 +25,22 @@ class ListsController < ApplicationController
   def edit
     @list = List.find(params[:id])
   end
-  
+
   def update
     list = List.find(params[:id])
     list.update(list_params)
     redirect_to list_path(list.id)
-  end  
-  
+  end
+
   def destroy
     list = List.find(params[:id])
     list.destroy
     redirect_to '/lists'
-  end  
-  
+  end
+
   private
-  
+
   def list_params
     params.require(:list).permit(:title, :body, :image)
-  end  
+  end
 end
